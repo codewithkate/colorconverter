@@ -93,7 +93,7 @@ class ColorGenerator:
         s = round(hsl[1])
         l = round(hsl[2])
         lightest = max(90, l) # larger l means lighter color
-        darkest = max(10, l) # smaller l means darker color
+        darkest = min(10, l) # smaller l means darker color
 
         diff = max(darkest, int((lightest - darkest) / (ncolors)))
         l_list = [i for i in range(darkest, lightest+diff, diff)]
