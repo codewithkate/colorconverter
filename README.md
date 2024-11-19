@@ -1,6 +1,6 @@
 # pyColorKit
 
-**pyColorKit** is a Python package designed to simplify color format conversions. It provides easy-to-use methods to convert between RGB, HEX, and HSL formats, with a focus on clean and modular design.
+**pyColorKit** is a Python package designed to simplify color format conversions. It provides easy-to-use methods to convert between RGB, HEX, and HSL formats.
 
 ## Features
 - Convert **HEX to RGB**
@@ -26,7 +26,7 @@ pip install color-converter
 
 ### Importing the Package
 ```python
-from pycolorkit import ColorConverter, ColorGenerator
+from pycolorkit.pycolorkit import ColorConverter, ColorGenerator
 ```
 
 ### Examples

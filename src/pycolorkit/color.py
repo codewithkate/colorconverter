@@ -103,7 +103,7 @@ class ColorGenerator:
         step_size = int((lightest - darkest) / (ncolors)) # ~=8; when ncolors=10 and range (10,90) 
         l_list = [i for i in range(darkest, lightest+step_size, step_size)]
 
-        sequence = [[h,s,l] for l in l_list]
+        sequence = [[h,s,i] for i in l_list]
 
         if type(sequence) != list:
             return hsl
