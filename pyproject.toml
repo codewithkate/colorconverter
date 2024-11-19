@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pycolorkit"
-version = "0.0.1"
+version = "1.0.0"
 authors = [
   { name="Kaitlen Crawford", email="hello@codewithkate.com" },
 ]
