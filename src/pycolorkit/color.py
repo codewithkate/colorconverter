@@ -12,8 +12,9 @@ class ColorConverter:
     @staticmethod
     def hex_to_rgb(h):
         # hexadecimal to decimal
-        return [int(h[i:i+2], 16) for i in (0, 2, 4)]
-    
+        rgb = [int(h[i:i+2], 16) for i in (0, 2, 4)]
+        return rgb
+
     @staticmethod
     def rgb_to_hsl(rgb):
         # Change range from 0-255 to 0-100%
@@ -48,8 +49,8 @@ class ColorConverter:
         h = round(h * 60)
         s = round(s * 100)
         l = round(l * 100)
-        return [h, s, l]
-    
+        hsl = [h, s, l]
+        return hsl
     @staticmethod
     def hsl_to_rgb(hsl):
         h = hsl[0]
@@ -71,7 +72,8 @@ class ColorConverter:
 
         # Match the lightness
         m = l - chroma/2
-        return [int((i+m) * 255) for i in rgb]
+        rgb = [int((i+m) * 255) for i in rgb]
+        return rgb
     
     @staticmethod
     def rgb_to_hex(rgb):
@@ -86,30 +88,18 @@ class ColorConverter:
 
 class ColorGenerator:
     @staticmethod
-    def sequence(hsl, ncolors=10, min_l=10, max_l=90): # Set range of lightness values
+    def sequence(hsl, ncolors=10, lightest=10, darkest=90): # Set range of lightness values
         h = round(hsl[0])
         s = round(hsl[1])
         l = round(hsl[2])
-        
-        if abs(l - max_l) <= 10: # only shades
-            max_l = l
-            shade_diff = int((l - min_l) / (ncolors))
-            shades = [i for i in range(min_l, l, shade_diff)]
-            sequence = shades
-        elif abs(l - min_l) <=10: # only tints
-            min_l = l
-            tint_diff = int((max_l - l) / (ncolors))
-            tints = [i for i in range(l, max_l, tint_diff)]
-            sequence = tints
-        else:
-            shade_diff = int((l - min_l) / (ncolors/2))
-            shades = [i for i in range(min_l, l, shade_diff)]
+        lightest = max(90, l) # larger l means lighter
+        darkest = min(10, l) # smaller l means darker
 
-            tint_diff = int((max_l - l) / (ncolors/2))
-            tints = [i for i in range(l, max_l, tint_diff)]
-            sequence = shades+tints
+        diff = max(darkest, int((lightest - darkest) / (ncolors)))
+        l_list = [i for i in range(darkest, lightest+diff, diff)]
 
-            return [(h,s,l) for l in sequence]
+        sequence = [[h,s,l] for l in l_list]
+        return sequence
     
     @staticmethod
     def compliment(hsl):
@@ -118,6 +108,8 @@ class ColorGenerator:
         l = hsl[2]
 
         if (h + 180) > 360:
-            return [h-180, s, l]
+            compliment =  [h-180, s, l]
         else:
-            return [h+180, s, l]
+            compliment = [h+180, s, l]
+
+        return compliment
