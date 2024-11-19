@@ -7,12 +7,14 @@ class ColorConverter:
         s = s.replace('#','')
         if len(s) == 3: # convert 3-char to 6-char
             s = [s[i] * 2 for i in range(3)] # duplicate each char in order
+
         return ''.join(s)
     
     @staticmethod
     def hex_to_rgb(h):
         # hexadecimal to decimal
         rgb = [int(h[i:i+2], 16) for i in (0, 2, 4)]
+        
         return rgb
 
     @staticmethod
@@ -50,7 +52,9 @@ class ColorConverter:
         s = round(s * 100)
         l = round(l * 100)
         hsl = [h, s, l]
+        
         return hsl
+    
     @staticmethod
     def hsl_to_rgb(hsl):
         h = hsl[0]
@@ -73,6 +77,7 @@ class ColorConverter:
         # Match the lightness
         m = l - chroma/2
         rgb = [int((i+m) * 255) for i in rgb]
+    
         return rgb
     
     @staticmethod
@@ -95,8 +100,8 @@ class ColorGenerator:
         lightest = max(90, l) # larger l means lighter color
         darkest = min(10, l) # smaller l means darker color
 
-        diff = max(darkest, int((lightest - darkest) / (ncolors)))
-        l_list = [i for i in range(darkest, lightest+diff, diff)]
+        step_size = int((lightest - darkest) / (ncolors)) # ~=8; when ncolors=10 and range (10,90) 
+        l_list = [i for i in range(darkest, lightest+step_size, step_size)]
 
         sequence = [[h,s,l] for l in l_list]
 
