@@ -12,7 +12,7 @@ class ColorConverter:
     @staticmethod
     def hex_to_rgb(h):
         # hexadecimal to decimal
-        return (int(h[i:i+2], 16) for i in (0, 2, 4))
+        return [int(h[i:i+2], 16) for i in (0, 2, 4)]
     
     @staticmethod
     def rgb_to_hsl(rgb):
@@ -48,7 +48,7 @@ class ColorConverter:
         h = round(h * 60)
         s = round(s * 100)
         l = round(l * 100)
-        return (h, s, l)
+        return [h, s, l]
     
     @staticmethod
     def hsl_to_rgb(hsl):
@@ -71,7 +71,7 @@ class ColorConverter:
 
         # Match the lightness
         m = l - chroma/2
-        return tuple(int((i+m) * 255) for i in rgb)
+        return [int((i+m) * 255) for i in rgb]
     
     @staticmethod
     def rgb_to_hex(rgb):
@@ -118,6 +118,6 @@ class ColorGenerator:
         l = hsl[2]
 
         if (h + 180) > 360:
-            return (h-180, s, l)
+            return [h-180, s, l]
         else:
-            return (h+180, s, l)
+            return [h+180, s, l]
