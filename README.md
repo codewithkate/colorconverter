@@ -26,7 +26,7 @@ pip install color-converter
 
 ### Importing the Package
 ```python
-from color_kit import ColorConverter, ColorGenerator
+from pycolorkit import ColorConverter, ColorGenerator
 ```
 
 ### Examples
